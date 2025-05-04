@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro - Native Games</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
+  <style>
+    body {
+      background: linear-gradient(to right, #715b3e, #3e2f1c);
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .register-container {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+    .register-box {
+      background: #fff;
+      color: #333;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      width: 100%;
+      max-width: 500px;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <div class="register-box">
+      <h2 class="text-center mb-4">Criar Conta</h2>
+      <form id="registerForm">
+        <div class="form-group">
+          <label for="name">Nome Completo</label>
+          <input type="text" class="form-control" id="name" placeholder="Digite seu nome" required />
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input type="password" class="form-control" id="password" placeholder="Crie uma senha" required />
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirmar Senha</label>
+          <input type="password" class="form-control" id="confirmPassword" placeholder="Confirme sua senha" required />
+        </div>
+        <button type="submit" class="btn btn-success btn-block">Cadastrar</button>
+      </form>
+
+      <p class="text-center mt-4">
+        Já tem uma conta? <a href="login.html">Entrar</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      if (password !== confirmPassword) {
+        alert('As senhas não coincidem.');
+        return;
+      }
+
+      // Aqui você pode adicionar a requisição para o backend com os dados de cadastro
+      console.log('Cadastro enviado:', { name, email, password });
+    });
+  </script>
+</body>
+</html>

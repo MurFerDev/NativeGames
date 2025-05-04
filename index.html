@@ -1,32 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <title>Native Games - A cultura joga junto!</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Native Games - Aqui a cultura joga junto!</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+
+    <style>
+        #globeViz {
+            width: 100%;
+            height: 600px;
+            margin-bottom: 5rem;
+        }
+
+        .marker-label {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #444;
+            border-radius: 6px;
+            padding: 4px 8px;
+            font-size: 0.9rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        main {
+            padding: 5rem;
+        }
+    </style>
 </head>
+
 <body>
-    <!-- Image and text -->
+    <!-- Navegação -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-center">
         <a class="navbar-brand" href="#">
             <img src="" width="30" height="30" class="d-inline-block align-top" alt="">
-        Native Games
+            Native Games
         </a>
 
         <ul class="navbar-nav m-auto">
-            <li class="nav-item active">
-            <a class="nav-link" href="#">Home<span class="sr-only">(Página atual)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Jogos</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Sobre</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link disabled" href="#">Contato</a>
-            </li>
+            <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Jogos</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Sobre</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
         </ul>
 
         <form class="form-inline">
@@ -35,130 +52,149 @@
         </form>
     </nav>
 
-    <section>
-      <div class="jumbotron">
-        <h1 class="display-4">Bem-vindo(a) a Native Games!</h1>
+    <!-- Cabeçalho -->
+    <section class="jumbotron text-center">
+        <h1 class="display-4">Bem-vindo(a) à Native Games!</h1>
         <p class="lead">Descubra jogos tradicionais de diferentes culturas!</p>
-      </div>
-  </section>
+    </section>
 
-  <div class="container">
-    <canvas id="canvas" width="1200" height="600" style="background-color: gray;">
-        <!-- Inserir aqui o globo 3D -->
-    </canvas>
-  </div>
+    </section>
+    <!-- Globo interativo -->
+    <div id="globeViz"></div>
+    </section>
 
-  <!--
-  <section>
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2" class="active"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="carousel-item active" >
-          <img class="d-block w-75 img-fluid m-auto" src="img/Adugo.jpg" alt="Adugo - Jogo da Onça" >
-          <div class="carousel-caption d-none d-md-block text-body bg-light">
-              <h5>Adugo - Jogo da Onça</h5>
-              <p>Um jogo de estratégia criado por povos indígenas da América do Sul.</p>
+    <main>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2" class="active"></li>
+        </ol>
+
+        <div class="bd-example">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="w-100"
+                            data-src="holder.js/700x400?auto=yes&amp;bg=777&amp;fg=555&amp;text=Adugo"
+                            alt="Adugo [700x400]" src="img/adugo.png" data-holder-rendered="true">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="w-100"
+                            data-src="holder.js/700x400?auto=yes&amp;bg=666&amp;fg=444&amp;text=Dou-Shou-Qi"
+                            alt="Dou-Shou-Qi [700x400]" src="img/doushouqi.png" data-holder-rendered="true">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="w-100"
+                            data-src="holder.js/700x400?auto=yes&amp;bg=555&amp;fg=333&amp;text=Bagha-Chall"
+                            alt="Bagha-Chall [700x400]" src="img/baghachall.png" data-holder-rendered="true">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="w-100"
+                            data-src="holder.js/700x400?auto=yes&amp;bg=555&amp;fg=333&amp;text=Senet"
+                            alt="Senet [700x400]" src="img/senet.png" data-holder-rendered="true">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="w-100"
+                            data-src="holder.js/700x400?auto=yes&amp;bg=555&amp;fg=333&amp;text=Mancala"
+                            alt="Mancala [700x400]" src="img/mancala.png" data-holder-rendered="true">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="w-100"
+                            data-src="holder.js/700x400?auto=yes&amp;bg=555&amp;fg=333&amp;text=Jogo Real de UR"
+                            alt="Jogo Real de UR [700x400]" src="img/jogorealdeur.png" data-holder-rendered="true">
+                    </div>
+                </div>
+
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Próximo</span>
+                </a>
+
             </div>
         </div>
-        <div class="carousel-item">
-          <img class="d-block w-75 img-fluid m-auto" src="img/Dou-shou-qi.png" alt="Dou Shou Qi - Jogo da Selva">
-          <div class="carousel-caption d-none d-md-block text-body bg-light">
-              <h5>Dou Shou Qi - Jogo da Selva</h5>
-              <p>Jogo de tabuleiro chinês de estratégia.</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-          <img class="d-block w-75 img-fluid m-auto" src="img/Bagha-chall.jpg" alt="Bagha-Chall">
-          <div class="carousel-caption d-none d-md-block text-body bg-light">
-              <h5>Bagha-Chall</h5>
-              <p>Jogo de tabuleiro tradicional do Nepal.</p>
-            </div>
-        </div>
-      </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Anterior</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Próximo</span>
-      </a>
-    </div>
-  </section>
-  -->
+    </main>
 
-  <section>
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <footer>
 
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2" class="active"></li>
-      </ol>
+    </footer>
 
-      <div class="carousel-inner">
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="http://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
-        <div class="carousel-item active">
-          <div class="card" style="width: 100rem;">
-            <img class="card-img-top w-auto" src="img/Adugo.jpg" alt="Adugo - Jogo da Onça">
-            <div class="card-body">
-              <h5 class="card-title">Adugo - Jogo da Onça</h5>
-              <p class="card-text">Um jogo de estratégia criado por povos indígenas da América do Sul</p>
-              <a href="#" class="btn btn-primary">Jogar</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel-item">
-          <div class="card" style="width: 100rem;">
-            <img class="card-img-top w-auto" src="img/Dou-shou-qi.png" alt="Adugo - Jogo da Onça">
-            <div class="card-body">
-              <h5 class="card-title">Adugo - Jogo da Onça</h5>
-              <p class="card-text">Um jogo de estratégia criado por povos indígenas da América do Sul</p>
-              <a href="#" class="btn btn-primary">Jogar</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel-item">
-          <div class="card" style="width: 100rem;">
-            <img class="card-img-top w-auto" src="img/Bagha-chall.jpg" alt="Adugo - Jogo da Onça">
-            <div class="card-body">
-              <h5 class="card-title">Adugo - Jogo da Onça</h5>
-              <p class="card-text">Um jogo de estratégia criado por povos indígenas da América do Sul</p>
-              <a href="#" class="btn btn-primary">Jogar</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Anterior</span>
-      </a>
-
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Próximo</span>
-      </a>
-
-    </div>
-  </section>
-
-  <footer>
-
-  </footer>
-
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  <script src="http://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-
+    <!-- Scripts globais -->
+    <script src="https://unpkg.com/three"></script>
+    <script src="https://unpkg.com/globe.gl"></script>
+    <script>
+        const globeContainer = document.getElementById('globeViz');
+        const world = Globe()(globeContainer)
+            .globeImageUrl('//unpkg.com/three-globe/example/img/earth-dark.jpg')
+            .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
+            .htmlElementsData([
+                {
+                    lat: -10.3333,
+                    lng: -53.2,
+                    name: 'Adugo (Brasil)',
+                    link: 'jogos/adugo.html'
+                },
+                {
+                    lat: 35.8617,
+                    lng: 104.1954,
+                    name: 'Dou Shou Qi (China)',
+                    link: 'jogos/doushouqi.html'
+                },
+                {
+                    lat: 26.8206,
+                    lng: 30.8025,
+                    name: 'Senet (Egito)',
+                    link: 'jogos/senet.html'
+                },
+                {
+                    lat: 33.2232,
+                    lng: 43.6793,
+                    name: 'Jogo Real de Ur (Mesopotâmia)',
+                    link: 'jogos/jogodeur.html'
+                },
+                {
+                    lat: 28.2350,
+                    lng: 84.0732,
+                    name: 'Bagha Chall (Nepal)',
+                    link: 'jogos/baghachall.html'
+                },
+                {
+                    lat: -1.2921,
+                    lng: 36.8219,
+                    name: 'Mancala (África)',
+                    link: 'jogos/mancala.html'
+                }
+            ])
+            .htmlElement(d => {
+                const el = document.createElement('div');
+                el.className = 'marker-label';
+                el.innerHTML = d.name;
+                el.style.cursor = 'pointer';
+                el.onclick = () => window.location.href = d.link;
+                return el;
+            });
+    </script>
 </body>
+
 </html>
