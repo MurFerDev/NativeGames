@@ -26,6 +26,9 @@
       font-size: 1.5rem;
       margin-top: 1rem;
     }
+    .logout-btn, .edit-btn {
+      margin-top: 1rem;
+    }
     .game-card {
       background: #fff8e7;
       color: #333;
@@ -41,52 +44,57 @@
       font-size: 0.9rem;
       color: #555;
     }
+    .modal-content {
+      color: #333;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="profile-container">
       <img src="img/default-avatar.png" alt="Foto de perfil" class="profile-image" id="userImage">
-      <h2 class="nickname" id="nickname">Usuário_Teste</h2>
+      <h2 class="nickname" id="nickname">Usuário</h2>
+      <div>
+        <button class="btn btn-outline-light edit-btn" data-toggle="modal" data-target="#editModal">Editar Perfil</button>
+        <button class="btn btn-danger logout-btn" onclick="logout()">Sair</button>
+      </div>
     </div>
 
     <h4 class="text-center mb-4">Meus Jogos Favoritos</h4>
-    <div id="jogosFavoritos" class="row justify-content-center">
-      <!-- Cards dos jogos serão inseridos aqui via JS -->
+    <div id="jogosFavoritos" class="row justify-content-center"></div>
+  </div>
+
+  <!-- Modal de Edição de Perfil -->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Editar Perfil</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="editForm">
+            <div class="form-group">
+              <label for="nomeInput">Nome</label>
+              <input type="text" class="form-control" id="nomeInput" placeholder="Novo nome">
+            </div>
+            <div class="form-group">
+              <label for="senhaInput">Nova Senha</label>
+              <input type="password" class="form-control" id="senhaInput" placeholder="Nova senha">
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 
-  <script>
-    const token = localStorage.getItem('token');
-    const usuario = JSON.parse(localStorage.getItem('usuario'));
-    
-    if (!token || !usuario) {
-      alert('Você precisa estar logado para acessar esta página.');
-      window.location.href = 'login.html';
-    } else {
-      document.getElementById('nickname').textContent = usuario.nome;
+  <!-- Bootstrap scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="js/hub/hub.js"></script>
 
-      // Simulação de jogos favoritos com estatísticas (substituir por dados reais futuramente)
-      const jogos = [
-        { nome: 'Adugo', vitorias: 12, derrotas: 5, partidas: 17 },
-        { nome: 'Senet', vitorias: 8, derrotas: 4, partidas: 12 },
-        { nome: 'Dou Shou Qi', vitorias: 6, derrotas: 9, partidas: 15 }
-      ];
-
-      const container = document.getElementById('jogosFavoritos');
-
-      jogos.forEach(jogo => {
-        const card = document.createElement('div');
-        card.className = 'col-md-4 game-card';
-        card.innerHTML = `
-          <h5>${jogo.nome}</h5>
-          <p class="stats">Vitórias: ${jogo.vitorias}</p>
-          <p class="stats">Derrotas: ${jogo.derrotas}</p>
-          <p class="stats">Total de Partidas: ${jogo.partidas}</p>
-        `;
-        container.appendChild(card);
-      });
-    }
-  </script>
 </body>
 </html>
