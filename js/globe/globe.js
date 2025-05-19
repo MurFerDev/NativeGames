@@ -1,6 +1,6 @@
 // Scripts do Globo 3D interativo
 
-const globeContainer = document.getElementById('globeViz');
+const globeContainer = document.querySelector('#globeViz');
 const world = Globe()(globeContainer)
     .globeImageUrl('//unpkg.com/three-globe/example/img/earth-dark.jpg')
     .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')

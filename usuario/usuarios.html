@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerenciar Usuários - Native Games Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="admin-dashboard.html">Native Games Admin</a>
+      <div class="ml-auto">
+        <span class="navbar-text text-white mr-3" id="adminNome">Admin</span>
+        <button class="btn btn-sm btn-warning" id="logoutBtn">Sair</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container py-4">
+    <h2 class="mb-4 text-center">👥 Gerenciamento de Usuários</h2>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Apelido</th>
+            <th>Tipo</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tabelaUsuarios">
+          <!-- Linhas carregadas via JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script type="module" src="usuarios.js"></script>
+</body>
+</html>

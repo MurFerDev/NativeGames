@@ -1,9 +1,9 @@
 
-document.getElementById('loginForm').addEventListener('submit', async function (e) {
+document.querySelector('#loginForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const email = document.getElementById('email').value;
-    const senha = document.getElementById('password').value;
+    const email = document.querySelector('#email').value;
+    const senha = document.querySelector('#password').value;
 
     try {
     const response = await fetch('http://localhost:3306/api/login', {
@@ -30,4 +30,6 @@ document.getElementById('loginForm').addEventListener('submit', async function (
     console.error('Erro ao fazer login:', err);
     alert('Erro ao se conectar com o servidor.');
     }
+
+    registrarAcao(id_usuario, 'Login realizado com sucesso', '/api/usuario/login', 'POST');
 });

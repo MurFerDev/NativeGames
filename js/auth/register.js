@@ -1,5 +1,6 @@
 import { postAutenticado } from '../utils/api.js';
 
+
 document.querySelector('#registerForm').addEventListener('submit', async function (e) {
   e.preventDefault();
 
@@ -32,4 +33,6 @@ document.querySelector('#registerForm').addEventListener('submit', async functio
     console.error('Erro ao registrar usuário:', err);
     alert('Erro ao se conectar com o servidor.');
   }
+
+  registrarAcao(result.insertId, 'Usuário cadastrado', '/api/usuario/register', 'POST');
 });

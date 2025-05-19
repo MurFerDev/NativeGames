@@ -4,22 +4,26 @@ import {
     putAutenticado,
     logout
   } from '../utils/api.js';
-  
+  /*
   const usuario = getUsuario();
   
   if (!usuario) {
     alert('Você precisa estar logado para acessar esta página.');
     logout();
   }
+  */
+  document.querySelector('#nickname').textContent = usuario.apelido_usuario || usuario.nome_usuario || 'Usuário';
   
-  document.getElementById('nickname').textContent = usuario.nome;
-  
+  const urlParams = new URLSearchParams(window.location.search);
+  const idParam = urlParams.get('id');
+  const url = idParam && usuario.tipo_usuario === 'admin' ? `/api/hub/dados?id=${idParam}` : `/api/hub/dados`;
+
   // Buscar dados do hub
   async function carregarHub() {
     try {
-      const data = await getAutenticado('http://localhost:3306/api/hub/dados');
+      const data = await getAutenticado('http://localhost:3000/api/hub/dados');
   
-      const container = document.getElementById('jogosFavoritos');
+      const container = document.querySelector('#jogosFavoritos');
       container.innerHTML = '';
   
       data.jogos.forEach(jogo => {
@@ -43,11 +47,11 @@ import {
   carregarHub();
   
   // Atualizar perfil
-  document.getElementById('editForm').addEventListener('submit', async (e) => {
+  document.querySelector('#editForm').addEventListener('submit', async (e) => {
     e.preventDefault();
   
-    const novoNome = document.getElementById('nomeInput').value;
-    const novaSenha = document.getElementById('senhaInput').value;
+    const novoNome = document.querySelector('#nomeInput').value;
+    const novaSenha = document.querySelector('#senhaInput').value;
   
     if (!novoNome && !novaSenha) {
       alert('Preencha ao menos um campo.');
@@ -61,7 +65,11 @@ import {
       });
   
       alert('Perfil atualizado com sucesso!');
-      localStorage.setItem('usuario', JSON.stringify({ ...usuario, nome: novoNome }));
+
+      if (novoNome) {
+        localStorage.setItem('usuario', JSON.stringify({ ...usuario, nome_usuario: novoNome }));
+      }
+      
       location.reload();
     } catch (err) {
       console.error(err);

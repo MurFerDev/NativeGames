@@ -7,7 +7,11 @@ const express = require('express');
 const cors = require('cors');
 
 const authRoutes = require('./routes/auth.routes');
+const userRoutes = require('./routes/user.routes');
 const hubRoutes = require('./routes/hub.routes');
+const favoritosRoutes = require('./routes/favoritos.routes');
+const logRoutes = require('./routes/logRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3306;
@@ -18,7 +22,13 @@ app.use(express.json());
 
 // Rotas da aplicação
 app.use('/api/auth', authRoutes);
+app.use('/api/usuario', userRoutes);
 app.use('/api/hub', hubRoutes);
+app.use('/api/favoritos', favoritosRoutes);
+
+// Rota para adminitradores
+app.use('/api/logs', logRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Rota raiz para teste rápido
 app.get('/', (req, res) => {

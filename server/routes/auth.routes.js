@@ -15,7 +15,7 @@ router.post('/register', async (req, res) => {
   }
 
   const checkQuery = 'SELECT * FROM usuarios WHERE email = ?';
-  db.query(checkQuery, [email], async (checkErr, results) => {
+  db.query(checkQuery, [email_usuario], async (checkErr, results) => {
     if (checkErr) return res.status(500).json({ error: 'Erro no servidor.' });
 
     if (results.length > 0) {
@@ -25,50 +25,13 @@ router.post('/register', async (req, res) => {
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(senha, saltRounds);
 
-    const insertQuery = 'INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)';
-    db.query(insertQuery, [nome, email, hashedPassword], (insertErr, result) => {
+    const insertQuery = 'INSERT INTO tb_usuario (nome_usuario, email_usuario, senha_usuario) VALUES (?, ?, ?)';
+    db.query(insertQuery, [nome_usuario, email_usuario, hashedPassword], (insertErr, result) => {
       if (insertErr) return res.status(500).json({ error: 'Erro ao cadastrar usuário.' });
       res.status(201).json({ message: 'Usuário cadastrado com sucesso!', userId: result.insertId });
     });
   });
 });
-
-// Login
-
-/*
-router.post('/login', (req, res) => {
-  const { email, senha } = req.body;
-
-  if (!email || !senha) {
-    return res.status(400).json({ error: 'E-mail e senha são obrigatórios.' });
-  }
-
-  const query = 'SELECT * FROM usuarios WHERE email = ?';
-  db.query(query, [email], async (err, results) => {
-    if (err) return res.status(500).json({ error: 'Erro no servidor.' });
-    if (results.length === 0) return res.status(401).json({ error: 'Usuário não encontrado.' });
-
-    const usuario = results[0];
-    const match = await bcrypt.compare(senha, usuario.senha);
-
-    if (!match) return res.status(401).json({ error: 'Senha incorreta.' });
-
-    const token = jwt.sign(
-      { id: usuario.id, nome: usuario.nome, email: usuario.email },
-      jwtSecret,
-      { expiresIn: '2h' }
-    );
-
-    res.status(200).json({
-      message: 'Login bem-sucedido',
-      token,
-      usuario: { id: usuario.id, nome: usuario.nome, email: usuario.email }
-    });
-  });
-});
-
-module.exports = router;
-*/
 
 // Rota de login com geração de token JWT
 app.post('/api/login', (req, res) => {
@@ -78,8 +41,8 @@ app.post('/api/login', (req, res) => {
     return res.status(400).json({ error: 'E-mail e senha são obrigatórios.' });
   }
 
-  const query = 'SELECT * FROM usuarios WHERE email = ?';
-  db.query(query, [email], async (err, results) => {
+  const query = 'SELECT * FROM tb_usuario WHERE email = ?';
+  db.query(query, [email_usuario], async (err, results) => {
     if (err) {
       console.error('Erro ao buscar usuário:', err);
       return res.status(500).json({ error: 'Erro no servidor.' });
@@ -90,14 +53,14 @@ app.post('/api/login', (req, res) => {
     }
 
     const usuario = results[0];
-    const match = await bcrypt.compare(senha, usuario.senha);
+    const match = await bcrypt.compare(senha, senha_hash_usuario);
 
     if (!match) {
       return res.status(401).json({ error: 'Senha incorreta.' });
     }
 
     const token = jwt.sign(
-      { id: usuario.id, nome: usuario.nome, email: usuario.email },
+      { id: id_usuario, nome: nome_usuario, apelido_usuario: apelido_usuario, email: email_usuario },
       jwtSecret,
       { expiresIn: '2h' }
     );
@@ -105,7 +68,7 @@ app.post('/api/login', (req, res) => {
     res.status(200).json({
       message: 'Login bem-sucedido',
       token,
-      usuario: { id: usuario.id, nome: usuario.nome, email: usuario.email }
+      usuario: { id: id_usuario, nome: nome_usuario, apelido_usuario: apelido_usuario, email: email_usuario }
     });
   });
 });

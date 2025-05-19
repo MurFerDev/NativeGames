@@ -1,7 +1,7 @@
 // Rota para edição de perfil
 app.put('/api/usuario/editar', autenticarToken, async (req, res) => {
     const { nome, senha } = req.body;
-    const usuarioId = req.usuario.id;
+    const usuarioId = req.id_usuario;
   
     if (!nome && !senha) {
       return res.status(400).json({ error: 'Informe pelo menos um campo para atualizar.' });
@@ -37,18 +37,20 @@ app.put('/api/usuario/editar', autenticarToken, async (req, res) => {
       console.error('Erro no servidor:', error);
       res.status(500).json({ error: 'Erro interno do servidor.' });
     }
+
+    registrarAcao(req.id_usuario, 'Atualizou nome ou senha', '/api/usuario/editar', 'PUT');
   });
   
   // Adicionar jogo aos favoritos
   app.post('/api/favoritos', autenticarToken, (req, res) => {
-    const usuarioId = req.usuario.id;
+    const usuarioId = req.id_usuario;
     const { jogo_id } = req.body;
   
     if (!jogo_id) {
       return res.status(400).json({ error: 'ID do jogo é obrigatório.' });
     }
   
-    const insert = 'INSERT INTO favoritos (usuario_id, jogo_id) VALUES (?, ?)';
+    const insert = 'INSERT INTO tb_favorito (usuario_id, jogo_id) VALUES (?, ?)';
     db.query(insert, [usuarioId, jogo_id], (err, result) => {
       if (err) {
         console.error('Erro ao adicionar favorito:', err);
@@ -60,10 +62,10 @@ app.put('/api/usuario/editar', autenticarToken, async (req, res) => {
   
   // Remover jogo dos favoritos
   app.delete('/api/favoritos/:jogo_id', autenticarToken, (req, res) => {
-    const usuarioId = req.usuario.id;
+    const usuarioId = req.id_usuario;
     const jogoId = req.params.jogo_id;
   
-    const del = 'DELETE FROM favoritos WHERE usuario_id = ? AND jogo_id = ?';
+    const del = 'DELETE FROM tb_favorito WHERE usuario_id = ? AND jogo_id = ?';
     db.query(del, [usuarioId, jogoId], (err, result) => {
       if (err) {
         console.error('Erro ao remover favorito:', err);
